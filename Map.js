@@ -15,11 +15,7 @@ const startCenter = [2.6, 43.1];
 const styles = Mapbox.StyleSheet.create({
   marker: {
     iconImage: "{image}",
-    textField: "{pictogram}", // Removing this line will fix the bug
-    textColor: "#000",
-    textAnchor: "top",
-    textSize: 15,
-    iconSize: 1
+    textField: "{text}" // Removing this line will fix the bug
   }
 });
 
@@ -30,7 +26,7 @@ function singleMarkerFeature() {
       id: 1,
       properties: {
         image: "POIactive",
-        pictogram: "ZZZ"
+        text: "x"
       },
       geometry: {
         type: "Point",
