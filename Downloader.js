@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
-import Mapbox from "@mapbox/react-native-mapbox-gl";
+import Mapbox from "@react-native-mapbox/maps";
 
 export const mapboxStyleUrl =
   "mapbox://styles/atomheartother/cjvqj3zub02df1cp2dgnrm8um";
@@ -18,8 +18,8 @@ export const maxBounds = [
 packs = {
   testPack: {
     bounds: maxBounds,
-    minZoom: 7,
-    maxZoom: 10
+    minZoom: 1,
+    maxZoom: 9
   }
 };
 
@@ -38,7 +38,6 @@ export default class Downloader extends React.PureComponent {
   };
 
   downloadPack = async (pack, key) => {
-    Mapbox.offlineManager.setProgressEventThrottle(5000);
     Mapbox.offlineManager.createPack(
       {
         name: key,
@@ -56,6 +55,9 @@ export default class Downloader extends React.PureComponent {
       async () => {
         // Delete it
         await this.deletePack(key);
+        this.setState({
+          downloaded: "ERR"
+        });
       }
     );
   };

@@ -1,6 +1,5 @@
 import React from "react";
-import Mapbox from "@mapbox/react-native-mapbox-gl";
-import SymbolLayer from "@mapbox/react-native-mapbox-gl/javascript/components/SymbolLayer";
+import Mapbox from "@react-native-mapbox/maps";
 
 export const mapboxStyleUrl =
   "mapbox://styles/atomheartother/cjvqj3zub02df1cp2dgnrm8um";
@@ -12,12 +11,12 @@ Mapbox.setAccessToken(mapboxAccessToken);
 
 const startCenter = [2.6, 43.1];
 
-const styles = Mapbox.StyleSheet.create({
+const styles = {
   marker: {
     iconImage: "{image}",
     textField: "{text}" // Removing this line will fix the bug
   }
-});
+};
 
 function singleMarkerFeature() {
   const features = [
@@ -42,7 +41,7 @@ function singleMarkerFeature() {
 
 const renderPoint = () => (
   <Mapbox.ShapeSource id="pointSource" shape={singleMarkerFeature()}>
-    <SymbolLayer id="pointMarker" style={styles.marker} />
+    <Mapbox.SymbolLayer id="pointMarker" style={styles.marker} />
   </Mapbox.ShapeSource>
 );
 
@@ -54,19 +53,19 @@ export default class Map extends React.PureComponent {
           this.map = c;
         }}
         logoEnabled={false}
-        zoomLevel={8.5}
-        centerCoordinate={startCenter}
         style={{ flex: 1 }}
-        minZoomLevel={8.5}
-        maxZoomLevel={24}
-        rotateEnabled={false}
-        pitchEnabled={false}
-        pitch={0}
         onDidFailLoadingMap={arg =>
           Alert.alert("Failed loading map", JSON.stringify(arg))
         }
         styleURL={mapboxStyleUrl}
       >
+        <Mapbox.Camera
+          centerCoordinate={startCenter}
+          zoomLevel={8.5}
+          rotateEnabled={false}
+          pitchEnabled={false}
+          pitch={0}
+        />
         {renderPoint()}
       </Mapbox.MapView>
     );

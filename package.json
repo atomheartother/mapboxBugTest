@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "16.8.3",
     "react-native": "0.59.8",
-    "@mapbox/react-native-mapbox-gl": "git://github.com/nitaliano/react-native-mapbox-gl.git#master"
+    "@react-native-mapbox/maps": "git://github.com/atomheartother/maps.git#master"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
